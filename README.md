@@ -1,3 +1,5 @@
-# Stream Template Repository
+# RS03AXPS-PC03A-4B-PHSENA302-streamed-phsen_data_record
 
-This repository is a template for all the other repositories.
+Stream Type: Science<br>
+Stream Content: Data Products<br>
+Instrument Group Code: PHSEN<br>
