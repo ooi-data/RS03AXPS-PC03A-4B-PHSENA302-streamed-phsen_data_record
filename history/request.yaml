@@ -1,5 +1,5 @@
 data_ready: false
 data_stream: RS03AXPS-PC03A-4B-PHSENA302-streamed-phsen_data_record
-last_request: '2021-08-01T00:28:10.098128Z'
+last_request: '2021-09-17T16:15:35.277981Z'
 response: https://raw.githubusercontent.com/ooi-data/RS03AXPS-PC03A-4B-PHSENA302-streamed-phsen_data_record/main/history/response.json
 status: pending
