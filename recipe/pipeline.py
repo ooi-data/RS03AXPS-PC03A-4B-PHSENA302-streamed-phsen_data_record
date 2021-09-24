@@ -106,30 +106,30 @@ def main(test_run, refresh, data_bucket, project_name, run_flow):
     print("1) SETTING UP THE FLOW")
     pipeline = OOIStreamPipeline(
         response,
-        storage_type='docker',
+#         storage_type='docker',
         stream_harvest=stream_harvest,
-        run_config_type='kubernetes',
+#         run_config_type='kubernetes',
         storage_options=storage_options,
-        run_config_options=run_options,
+#         run_config_options=run_options,
         task_state_handlers=[process_status_update]
     )
     pipeline.flow.validate()
     print(pipeline)
 
-    print("2) REGISTERING THE FLOW")
-    pipeline.flow.register(project_name=project_name)
+#     print("2) REGISTERING THE FLOW")
+#     pipeline.flow.register(project_name=project_name)
 
     if run_flow:
-        print("3) RUNNING THE FLOW")
-        subprocess.Popen(
-            [
-                "prefect",
-                "run",
-                "flow",
-                f"--name={name}",
-                f"--project={project_name}",
-            ]
-        )
+#         print("3) RUNNING THE FLOW")
+#         subprocess.Popen(
+#             [
+#                 "prefect",
+#                 "run",
+#                 "flow",
+#                 f"--name={name}",
+#                 f"--project={project_name}",
+#             ]
+#         )
         status_json = get_process_status_json(
             table_name=name,
             data_bucket=data_bucket,
@@ -138,8 +138,11 @@ def main(test_run, refresh, data_bucket, project_name, run_flow):
             data_start=response["stream"]["beginTime"],
             data_end=response["stream"]["endTime"],
         )
-        print("4) WRITING FLOW STATUS")
+        print("2) WRITING FLOW STATUS")
         write_process_status_json(status_json)
+        
+        print("3) RUNNING THE FLOW")
+        pipeline.flow.run()
 
 
 if __name__ == "__main__":
