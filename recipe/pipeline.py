@@ -109,7 +109,7 @@ def main(test_run, refresh, data_bucket, project_name, run_flow):
 #         storage_type='docker',
         stream_harvest=stream_harvest,
 #         run_config_type='kubernetes',
-        storage_options=storage_options,
+#         storage_options=storage_options,
 #         run_config_options=run_options,
         task_state_handlers=[process_status_update]
     )
