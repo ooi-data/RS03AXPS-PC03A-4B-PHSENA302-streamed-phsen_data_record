@@ -1,9 +1,7 @@
 from pathlib import Path
-import os
 import json
 import datetime
 import argparse
-import subprocess
 import yaml
 
 from ooi_harvester.producer.models import StreamHarvest
@@ -77,7 +75,6 @@ def main(test_run, refresh, data_bucket, project_name, run_flow):
 
     # Get name and image tag
     name = response['stream']['table_name']
-    now = datetime.datetime.utcnow()
 
     print("1) SETTING UP THE FLOW")
     pipeline = OOIStreamPipeline(
@@ -85,7 +82,7 @@ def main(test_run, refresh, data_bucket, project_name, run_flow):
         stream_harvest=stream_harvest,
         task_state_handlers=[process_status_update],
         data_availability=True,
-        da_config=dict(gh_write=True)
+        da_config={'gh_write': True}
     )
     pipeline.flow.validate()
     print(pipeline)
@@ -101,7 +98,7 @@ def main(test_run, refresh, data_bucket, project_name, run_flow):
         )
         print("2) WRITING FLOW STATUS")
         write_process_status_json(status_json)
-        
+
         print("3) RUNNING THE FLOW")
         pipeline.flow.run()
 
